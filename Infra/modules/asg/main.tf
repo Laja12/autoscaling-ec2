@@ -86,7 +86,7 @@ resource "aws_cloudwatch_metric_alarm" "scale_out" {
   dimensions = {
     AutoScalingGroupName = var.asg_name
   }
-  alarm_actions = [aws_sns_topic.alerts.arn]
+  
 }
 
 
@@ -103,17 +103,7 @@ resource "aws_cloudwatch_metric_alarm" "scale_in" {
   dimensions = {
     AutoScalingGroupName = var.asg_name
   }
-  alarm_actions = [aws_sns_topic.alerts.arn]
-}
-
-resource "aws_sns_topic" "alerts" {
-  name = "cpu-alerts-topic"
-}
-
-resource "aws_sns_topic_subscription" "email_alert" {
-  topic_arn = aws_sns_topic.alerts.arn
-  protocol  = "email"
-  endpoint  = "sbvh1437@gmail.com"  
+ 
 }
 
 output "launch_template_id" {
